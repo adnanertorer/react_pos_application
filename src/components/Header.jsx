@@ -38,7 +38,7 @@ const Header = () => {
               <span className="md:text-xs text-[10px]">Sepet</span>
             </Link>
           </Badge>
-          <Link to={"/"} className="menu-link flex flex-col hover:text-[#40a9ff] transition-all">
+          <Link to={"/bills"} className="menu-link flex flex-col hover:text-[#40a9ff] transition-all">
             <CopyOutlined className="md:text-2xl text-xl" />
             <span className="md:text-xs text-[10px]">Faturalar</span>
           </Link>
