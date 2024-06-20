@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, message } from "antd";
 import {
   ClearOutlined,
   PlusCircleOutlined,
@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { removeFromCart, increase, decrease
+import { removeFromCart, increase, decrease, clearCart
  } from '../../redux/cartSlice';
 
 const CartTotals = () => {
@@ -27,7 +27,10 @@ const CartTotals = () => {
                     src={item.img}
                     alt=""
                     className="w-16 h-16 object-cover cursor-pointer"
-                    onClick={() => dispatch(removeFromCart(item))}
+                    onClick={() => {
+                      dispatch(removeFromCart(item));
+                      message.success("Ürün Sepetten Silindi.");
+                    }}
                   />
                   <div className="flex flex-col ml-2">
                     <b>{item.title}</b>
@@ -54,6 +57,7 @@ const CartTotals = () => {
                       if (item.quantity === 1) {
                         if (window.confirm("Ürün Silinsin Mi?")) {
                           dispatch(decrease(item));
+                          message.success("Ürün Sepetten Silindi.");
                         }
                       }
                       if (item.quantity > 1) {
@@ -90,7 +94,12 @@ const CartTotals = () => {
           </div>
         </div>
         <div className="py-4 px-2">
-          <Button type="primary" size="large" className="w-full">
+        <Button
+            type="primary"
+            size="large"
+            className="w-full"
+            disabled={cart.cartItems.length === 0}
+          >
             Sipariş Oluştur
           </Button>
           <Button
@@ -99,6 +108,13 @@ const CartTotals = () => {
             className="w-full mt-2 flex items-center justify-center"
             icon={<ClearOutlined />}
             danger
+            disabled={cart.cartItems.length === 0}
+            onClick={() => {
+              if (window.confirm("Emin Misiniz?")) {
+                dispatch(clearCart());
+                message.success("Sepet Başarıyla Temizlendi.");
+              }
+            }}
           >
             Temizle
           </Button>
