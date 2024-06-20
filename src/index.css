@@ -24,3 +24,7 @@ body {
   background-color: #1677ff;
 }
 
+.menu-link .anticon{
+  display: flex;
+  justify-content: center;
+}
