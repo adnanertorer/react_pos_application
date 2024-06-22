@@ -108,7 +108,7 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
                 </thead>
                 <tbody>
                   {customer?.cartItems.map((item) => (
-                    <tr className="border-b border-slate-200">
+                    <tr className="border-b border-slate-200" key={item._id}>
                       <td className="py-4 sm:table-cell hidden">
                         <img
                           src={item.img}
